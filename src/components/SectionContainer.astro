@@ -1,0 +1,43 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+}
+const { id, class: className } = Astro.props;
+---
+
+<section class={`section-container ${className ? className : ""}`} id={id}>
+  <slot />
+</section>
+
+<style>
+  .section-container {
+    max-width: 1200px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+  }
+
+  .full-width {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .mt-4 {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 900px) {
+    .mt-4 {
+      margin-top: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .mt-4 {
+      margin-top: 1.5rem; 
+    }
+  }
+</style>

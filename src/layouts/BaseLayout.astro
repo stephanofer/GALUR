@@ -1,0 +1,47 @@
+---
+import Alert from "@/components/Alert.astro";
+import Footer from "@/components/Footer.astro";
+import MainHead from "@/components/MainHead.astro";
+import Navbar from "@/components/Navbar.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Titulo por defecto",
+  description = "descripcion por defecto",
+} = Astro.props;
+
+const alertMessage = "Este es un mensaje de alerta generico";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <MainHead title={title} description={description} />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <div class="Footer-bg">
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  body{
+    background-color: var(--bg-color);
+  }
+  main {
+    margin: 0;
+    width: 100%;
+  }
+  .Footer-bg {
+    background-color: var(--color-secondary-light);
+  }
+</style>

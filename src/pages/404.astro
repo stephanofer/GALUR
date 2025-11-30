@@ -1,0 +1,95 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const title = "404 – Página no encontrada";
+const description = "La página que buscas no existe o ha sido movida.";
+export const prerender = true;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="error-wrapper">
+    <div class="error-box">
+      <p class="tag">404</p>
+      <h1 class="title">Página no encontrada</h1>
+
+      <p class="desc">
+        Parece que esta página está tomando una siesta en alguna de nuestras
+        camas. ¿Volvemos al inicio?
+      </p>
+
+      <a href="/" class="btn-home">Volver al inicio</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--color-bg);
+  }
+
+  .error-box {
+    text-align: center;
+    max-width: 600px;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .tag {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #888;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .desc {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 2rem;
+    text-wrap: pretty;
+  }
+
+  .btn-home {
+    display: inline-block;
+    padding: 0.85rem 1.75rem;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.25s ease;
+  }
+
+  .btn-home:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    .error-box {
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
+    }
+
+    .desc {
+      font-size: 0.95rem;
+    }
+  }
+</style>

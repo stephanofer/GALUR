@@ -1,0 +1,378 @@
+---
+import Web from "@/assets/svg/Web.svg";
+import Instagram from "@/assets/svg/Instagram.svg";
+import Facebook from "@/assets/svg/Facebook.svg";
+import Tiktok from "@/assets/svg/Tiktok.svg";
+import Youtube from "@/assets/svg/Youtube.svg";
+---
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h2 class="brand-logo">ARM</h2>
+        <p class="brand-tagline">
+          Local, Universal,<br />
+          Funcional y Ecológico.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3 class="column-title">Sobre la marca</h3>
+          <ul class="column-list">
+            <li><a href="#">Filosofía</a></li>
+            <li><a href="#">Nuestro origen</a></li>
+            <li><a href="#">Madera ecológica</a></li>
+            <li><a href="#">Showroom</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3 class="column-title">Ayuda</h3>
+          <ul class="column-list">
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#">Cómo cuidar la madera</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Envío y devoluciones</a></li>
+            <li><a href="#">Formas de pago</a></li>
+            <li><a href="#">Condiciones</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3 class="column-title">Social</h3>
+          <ul class="column-list social-list">
+            <li>
+              <a href="#" class="social-link">
+                <Instagram />
+                <p class="paragraf-social-link">Instagram</p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-link">
+                <Tiktok />
+                <p class="paragraf-social-link">Tik Tok</p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-link">
+                <Facebook />
+                <p class="paragraf-social-link">Facebook</p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-link">
+                <Youtube />
+                <p class="paragraf-social-link">Youtube</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="contact-info">
+          <p class="company-name">Todiolufe S.L.</p>
+          <p>Pol.Ind.Etxezarreta</p>
+          <p>20749 Aizarnazabal (Gipuzkoa)</p>
+
+          <p class="contact-phone">+34 943 810 795</p>
+          <p class="contact-email">info@ARM.com</p>
+
+          <p class="schedule">L-V: DE 10:00 A 17:00 h</p>
+          <p class="schedule">S: DE 10:00 a 13:00 h</p>
+
+          <p class="closed-days">No abrimos todos los sábados</p>
+          <a href="#" class="calendar-link">Consulta aquí el calendario</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p class="copyright">© 2025 ARM - Todos los Derechos Reservados</p>
+        <div class="legal-links">
+          <a>Aviso legal</a>
+          <a>Política de cookies</a>
+          <a>Políticas Legales</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom-right">
+        <div class="language-selector">
+          <Web width="18" height="18" />
+          <span>ARM | Español</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+    color: var(--color-text);
+    padding-top: 4rem;
+    background-color: var(--color-secondary-light);
+  }
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-main {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  /* Brand Section */
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .brand-logo {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .brand-tagline {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .footer-funding {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  /* Links Section */
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-links {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .column-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+
+  .column-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .column-list li a {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .column-list li a:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+
+  .social-list .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center; /* Centra el texto con el icono */
+    gap: 0.5rem;
+  }
+
+  .paragraf-social-link {
+    display: flex;
+    align-items: center; /* Asegura alineación vertical del texto */
+    margin: 0;
+  }
+
+  /* Contact Section */
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    border-left: 2px solid #e5e5e5;
+    padding-left: 1rem;
+  }
+
+  .contact-info p {
+    line-height: 1.7;
+  }
+
+  .company-name {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-contact {
+      max-width: 400px;
+    }
+  }
+
+  .contact-info p {
+    margin: 0;
+  }
+
+  .company-name {
+    font-weight: 600;
+    margin-top: 0;
+  }
+
+  .contact-phone,
+  .contact-email {
+    font-weight: 500;
+  }
+
+  .schedule {
+    margin-top: 0.5rem;
+  }
+
+  .closed-days {
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+
+  .calendar-link {
+    color: var(--color-text-light);
+    text-decoration: underline;
+    font-size: 0.9rem;
+  }
+
+  .calendar-link:hover {
+    color: var(--color-text);
+  }
+
+  /* Footer Bottom */
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra TODO horizontalmente */
+    text-align: center; /* Centra textos */
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between; /* Mantiene cada bloque a un lado */
+      align-items: center;
+      gap: 6rem; /* Aumenta la separación entre los bloques */
+    }
+
+    .footer-bottom-left,
+    .footer-bottom-right {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .footer-bottom-right {
+      align-items: flex-end;
+      text-align: right;
+    }
+  }
+
+  .footer-bottom-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra contenido */
+    gap: 1rem;
+  }
+
+  .copyright {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .legal-links {
+    justify-content: center;
+  }
+
+  .legal-links a {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .legal-links a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-bottom-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra aquí también */
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-bottom-right {
+      align-items: flex-end;
+    }
+  }
+
+  .language-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+</style>
