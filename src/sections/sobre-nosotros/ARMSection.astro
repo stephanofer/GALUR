@@ -2,234 +2,413 @@
 import SectionContainer from "@/components/SectionContainer.astro";
 ---
 
-<section class="lufe-section">
-  <div class="lufe-intro">
-    <p class="intro-text">
-      En ARM diseñamos y fabricamos muebles con el objetivo de mejorar nuestra
-      <span class="highlight">NATURALEZA</span> y nuestro <span
-        class="highlight">ENTORNO</span
-      >.
-    </p>
+<section class="arm-section">
+  <!-- Hero con diseño magazine -->
+  <div class="section-hero">
+    <div class="hero-number">ARM</div>
+    <div class="hero-content">
+      <h2 class="hero-title">Nuestra esencia</h2>
+      <p class="hero-text">
+        En ARM diseñamos y fabricamos muebles con el objetivo de mejorar nuestra
+        <strong>naturaleza</strong> y nuestro <strong>entorno</strong>.
+      </p>
+    </div>
   </div>
 
-  <div class="lufe-grid">
-    <div class="grid-item item-1">
-      <div class="image-container">
-        <img
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=1000&fit=crop"
-          alt="Edificio LUFE - Fabricación local"
-        />
+  <!-- Timeline vertical con alternancia -->
+  <div class="timeline-container">
+    <!-- Item 1 - A de Local -->
+    <article class="timeline-item layout-left">
+      <div class="item-visual">
+        <div class="visual-frame">
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=1000&fit=crop"
+            alt="ARM - Fabricación local"
+            class="visual-image"
+          />
+          <div class="visual-overlay"></div>
+        </div>
       </div>
-    </div>
-
-    <div class="grid-item item-2">
-      <div class="content-block">
-        <h2 class="letter">A</h2>
-        <p class="label">de local</p>
-        <p class="description">
+      <div class="item-content">
+        <div class="content-badge">
+          <span class="badge-letter">A</span>
+        </div>
+        <h3 class="content-title">de local</h3>
+        <p class="content-description">
           Lo nuestro tiene un sello español, un pequeño pueblo de Galicia, con
           una rica tradición en tres siglos, así lo las raíces artesanas y la
           pasión por el buen diseño.
         </p>
+        <div class="content-divider"></div>
       </div>
-    </div>
+    </article>
 
-    <div class="grid-item item-3">
-      <div class="content-block">
-        <h2 class="letter">R</h2>
-        <p class="label">de universal</p>
-        <p class="description">
+    <!-- Item 2 - R de Universal -->
+    <article class="timeline-item layout-right">
+      <div class="item-content">
+        <div class="content-badge">
+          <span class="badge-letter">R</span>
+        </div>
+        <h3 class="content-title">de universal</h3>
+        <p class="content-description">
           Plantamos con la colaboración en la marca, aprendiendo cosas en todo
           el proceso de producción, distribución global, calidad internacional y
-          nos da la oportunidad de participar en proyectos flexibles. Firmeza,
-          flexibilidad, las pequeñas así diseños sorprendentes. Así nuestros en
-          diseño.
+          nos da la oportunidad de participar en proyectos flexibles.
         </p>
+        <div class="content-divider"></div>
       </div>
-    </div>
-
-    <div class="grid-item item-4">
-      <div class="image-container">
-        <img
-          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
-          alt="Diseño universal - Planificación"
-        />
+      <div class="item-visual">
+        <div class="visual-frame">
+          <img
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
+            alt="Diseño universal - Planificación"
+            class="visual-image"
+          />
+          <div class="visual-overlay"></div>
+        </div>
       </div>
-    </div>
+    </article>
 
-    <div class="grid-item item-5">
-      <div class="image-container">
-        <img
-          src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&h=800&fit=crop"
-          alt="Funcionalidad - Muebles prácticos"
-        />
+    <!-- Item 3 - M de Funcional -->
+    <article class="timeline-item layout-left">
+      <div class="item-visual">
+        <div class="visual-frame">
+          <img
+            src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&h=800&fit=crop"
+            alt="Funcionalidad - Muebles prácticos"
+            class="visual-image"
+          />
+          <div class="visual-overlay"></div>
+        </div>
       </div>
-    </div>
-
-    <div class="grid-item item-6">
-      <div class="content-block">
-        <h2 class="letter">M</h2>
-        <p class="label">de funcional</p>
-        <p class="description">
+      <div class="item-content">
+        <div class="content-badge">
+          <span class="badge-letter">M</span>
+        </div>
+        <h3 class="content-title">de funcional</h3>
+        <p class="content-description">
           Cuando diseñamos un mueble lo hacemos pensando en su versatilidad y en
           sus múltiples usos que puede tener para darle su vida al máximo. Antes
           de calidad hacer lograr el máximo bien.
         </p>
+        <div class="content-divider"></div>
       </div>
-    </div>
+    </article>
   </div>
 </section>
 
 <style>
-  .lufe-section {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 1rem;
+  .arm-section {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
   }
 
-  .lufe-intro {
+  /* Hero Section */
+  .section-hero {
+    position: relative;
     text-align: center;
-    margin-bottom: 5rem;
-    max-width: 900px;
-    margin-inline: auto;
+    margin-bottom: 6rem;
+    padding: 3rem 0;
   }
 
-  .intro-text {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.8;
-    color: var(--color-secondary);
+  .hero-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(8rem, 15vw, 14rem);
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.03);
+    line-height: 1;
+    font-family: var(--font-primary);
+    pointer-events: none;
   }
 
-  .highlight {
-    font-weight: 800;
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.2;
     color: var(--color-secondary);
+    margin: 0 0 1.5rem 0;
+    font-family: var(--font-primary);
+  }
+
+  .hero-text {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    line-height: 1.7;
+    color: var(--color-secondary);
+    margin: 0;
+  }
+
+  .hero-text strong {
+    font-weight: 600;
     position: relative;
   }
 
-  .highlight::after {
-    content: "";
+  .hero-text strong::after {
+    content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -2px;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-secondary), transparent);
+    height: 2px;
+    background: var(--color-secondary);
+    opacity: 0.3;
   }
 
-  /* === GRID === */
-  .lufe-grid {
+  /* Timeline Container */
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    position: relative;
+  }
+
+  /* Timeline Item */
+  .timeline-item {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
+    gap: 4rem;
+    align-items: center;
   }
 
-  /* === IMÁGENES === */
-  .image-container {
-    width: 100%;
+  .timeline-item.layout-right {
+    direction: rtl;
+  }
+
+  .timeline-item.layout-right > * {
+    direction: ltr;
+  }
+
+  /* Visual Section */
+  .item-visual {
+    position: relative;
+  }
+
+  .visual-frame {
+    position: relative;
+    border-radius: 20px;
     overflow: hidden;
-    border-radius: 1.25rem;
-    aspect-ratio: 4 / 5;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
   }
 
-  .image-container img {
+  .timeline-item:hover .visual-frame {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+  }
+
+  .visual-image {
     width: 100%;
     height: 100%;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
-    transition: transform 0.8s ease;
+    transition: transform 0.6s ease;
   }
 
-  .image-container:hover img {
+  .timeline-item:hover .visual-image {
     transform: scale(1.08);
   }
 
-  /* === BLOQUES DE TEXTO === */
-  .content-block {
-    padding: 3rem;
-    background: linear-gradient(145deg, #ffffff, #f2f2f2);
-    border-radius: 1.5rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .content-block::before {
-    content: "";
+  .visual-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-      circle at top right,
-      rgba(66, 66, 66, 0.12),
-      transparent 70%
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.1) 100%
     );
-    opacity: 0;
-    transition: opacity 0.4s ease;
   }
 
-  .content-block:hover::before {
-    opacity: 1;
+  /* Content Section */
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 0;
   }
 
-  .letter {
-    font-size: clamp(5rem, 10vw, 8rem);
-    font-weight: 800;
-    line-height: 0.9;
-    margin: 0 0 0.8rem 0;
+  .content-badge {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .badge-letter {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    font-family: var(--font-primary);
+  }
+
+  .content-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 500;
     color: var(--color-secondary);
-    opacity: 0.45;
+    margin: 0;
+    font-family: var(--font-primary);
+    text-transform: lowercase;
   }
 
-  .label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--color-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-  }
-
-  .description {
-    font-size: 1rem;
+  .content-description {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
     line-height: 1.8;
     color: var(--color-secondary);
-    max-width: 520px;
+    opacity: 0.85;
+    margin: 0;
   }
 
-  /* === RESPONSIVE === */
-  @media (max-width: 968px) {
-    .lufe-grid {
+  .content-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--color-secondary);
+    opacity: 0.2;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .arm-section {
+      padding: 4rem 1.5rem;
+    }
+
+    .section-hero {
+      margin-bottom: 5rem;
+      padding: 2.5rem 0;
+    }
+
+    .timeline-container {
+      gap: 4rem;
+    }
+
+    .timeline-item {
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .arm-section {
+      padding: 3rem 1.25rem;
+    }
+
+    .section-hero {
+      margin-bottom: 4rem;
+      padding: 2rem 0;
+    }
+
+    .hero-number {
+      font-size: 8rem;
+    }
+
+    .timeline-container {
+      gap: 3rem;
+    }
+
+    .timeline-item {
+      grid-template-columns: 1fr;
       gap: 2rem;
     }
 
-    .content-block {
-      padding: 2rem;
+    .timeline-item.layout-right {
+      direction: ltr;
     }
 
-    .letter {
-      font-size: clamp(4rem, 12vw, 6rem);
+    .visual-frame {
+      border-radius: 16px;
+    }
+
+    .visual-image {
+      aspect-ratio: 16 / 10;
+    }
+
+    .item-content {
+      text-align: center;
+      align-items: center;
+      padding: 1.5rem 0;
+    }
+
+    .content-badge {
+      width: 70px;
+      height: 70px;
+    }
+
+    .badge-letter {
+      font-size: 2.25rem;
     }
   }
 
-  @media (max-width: 640px) {
-    .lufe-grid {
-      grid-template-columns: 1fr;
+  @media (max-width: 480px) {
+    .arm-section {
+      padding: 2.5rem 1rem;
     }
 
-    .content-block {
-      padding: 1.8rem 1.5rem;
-      text-align: center;
+    .section-hero {
+      margin-bottom: 3rem;
+      padding: 1.5rem 0;
     }
 
-    .description {
-      margin-inline: auto;
+    .hero-number {
+      font-size: 6rem;
     }
 
-    .letter {
-      margin-bottom: 0.5rem;
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-text {
+      font-size: 1rem;
+    }
+
+    .timeline-container {
+      gap: 2.5rem;
+    }
+
+    .timeline-item {
+      gap: 1.5rem;
+    }
+
+    .visual-frame {
+      border-radius: 12px;
+    }
+
+    .item-content {
+      padding: 1rem 0;
+      gap: 1.25rem;
+    }
+
+    .content-badge {
+      width: 64px;
+      height: 64px;
+    }
+
+    .badge-letter {
+      font-size: 2rem;
+    }
+
+    .content-title {
+      font-size: 1.35rem;
+    }
+
+    .content-description {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .content-divider {
+      width: 50px;
+      height: 2px;
     }
   }
 </style>

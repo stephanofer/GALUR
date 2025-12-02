@@ -7,68 +7,111 @@ import Email from "@/assets/svg/Email.svg";
 ---
 
 <div class="contact-wrapper">
-  <div class="contact-header">
-    <h1 class="contact-title">Contacto</h1>
-    <p class="contact-subtitle">
-      Revisa nuestro apartado de <strong>preguntas frecuentes</strong> si tienes
-      cualquier duda y necesitas más ayuda o, escríbenos a <a
-        href="mailto:info@muebleslife.com"
-        class="email-link">{email}</a
-      >
-    </p>
-    <p class="contact-greeting">Lima, Perú</p>
+  <!-- Hero con split layout -->
+  <div class="contact-hero">
+    <div class="hero-left">
+      <div class="location-badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 2C7.24 2 5 4.24 5 7C5 10.88 10 18 10 18C10 18 15 10.88 15 7C15 4.24 12.76 2 10 2ZM10 9C8.9 9 8 8.1 8 7C8 5.9 8.9 5 10 5C11.1 5 12 5.9 12 7C12 8.1 11.1 9 10 9Z" fill="currentColor"/>
+        </svg>
+        <span>Lima, Perú</span>
+      </div>
+      <h1 class="hero-title">¿Necesitas<br />contactarnos?</h1>
+      <p class="hero-description">
+        Revisa nuestro apartado de <strong>preguntas frecuentes</strong> o contáctanos
+        directamente.
+      </p>
+    </div>
+    <div class="hero-right">
+      <a href={emailLink} class="quick-contact-card">
+        <div class="card-icon">
+          <Email width="28" height="28" />
+        </div>
+        <div class="card-text">
+          <span class="card-label">Email directo</span>
+          <span class="card-value">{email}</span>
+        </div>
+        <div class="card-arrow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+    </div>
   </div>
 
-  <div class="contact-content">
-    <div class="map-container">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.8!2d-2.0!3d43.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDAwJzAwLjAiTiAywrAwMCcwMC4wIlc!5e0!3m2!1ses!2ses!4v1234567890"
-        width="100%"
-        height="100%"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación de ARM CORPORATION"></iframe>
+  <!-- Main content grid -->
+  <div class="contact-grid">
+    <!-- Mapa destacado -->
+    <div class="map-section">
+      <div class="section-label">
+        <span>Nuestra ubicación</span>
+        <div class="label-line"></div>
+      </div>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.8!2d-2.0!3d43.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDAwJzAwLjAiTiAywrAwMCcwMC4wIlc!5e0!3m2!1ses!2ses!4v1234567890"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de ARM CORPORATION"
+        ></iframe>
+      </div>
     </div>
 
-    <div class="contact-info">
-      <div class="info-block">
-        <div class="info-icon">
-          <Email width="24" height="24" />
+    <!-- Contact cards -->
+    <div class="contact-cards">
+      <!-- Card 1 - Phone -->
+      <div class="contact-card card-primary">
+        <div class="card-header">
+          <div class="header-icon">
+            <CallPhone width="24" height="24" />
+          </div>
+          <h3 class="card-title">Atención telefónica</h3>
         </div>
-        <div class="info-content">
-          <h3 class="info-label">Correo electrónico:</h3>
-          <a href={emailLink} class="info-value">{email}</a>
+        <div class="card-body">
+          <a href={phoneLink} class="contact-link primary">{phoneNumber}</a>
+          <div class="schedule-info">
+            <div class="schedule-row">
+              <span class="schedule-day">Lunes - Viernes</span>
+              <span class="schedule-time">10:00 - 17:00 h</span>
+            </div>
+            <div class="schedule-row">
+              <span class="schedule-day">Sábados</span>
+              <span class="schedule-time">10:00 - 13:00 h</span>
+            </div>
+          </div>
+          <div class="schedule-special">
+            <strong>Horario Agosto:</strong>
+            <span>L-V 09:00-16:00 h · Sábados cerrado</span>
+          </div>
         </div>
       </div>
 
-      <div class="info-block">
-        <div class="info-icon">
-          <CallPhone width="24" height="24" />
+      <!-- Card 2 - Press -->
+      <div class="contact-card">
+        <div class="card-header">
+          <div class="header-icon">
+            <Paper width="24" height="24" />
+          </div>
+          <h3 class="card-title">Prensa y colaboraciones</h3>
         </div>
-        <div class="info-content">
-          <h3 class="info-label">Atención al cliente:</h3>
-          <a href={phoneLink} class="info-value phone">{phoneNumber}</a>
-          <p class="info-schedule">L-V, DE 10:00 A 17:00 h</p>
-          <p class="info-schedule">S: DE 10:00 a 13:00 h</p>
-          <p class="info-schedule schedule-highlight">
-            HORARIO AGOSTO:<br />L-V, DE 09:00 A 16:00 h<br />S: CERRADO
-          </p>
-        </div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-icon">
-          <Paper width="24" height="24" />
-        </div>
-        <div class="info-content">
-          <h3 class="info-label">Prensa:</h3>
-          <a href="mailto:marketing@muebleslife.com" class="info-value"
-            >marketing@muebleslife.com</a
-          >
-          <p class="info-extra">Colaboraciones:</p>
-          <a href="#" class="info-value form-link">Rellena este formulario</a>
+        <div class="card-body">
+          <div class="contact-item">
+            <span class="item-label">Prensa</span>
+            <a href="mailto:marketing@muebleslife.com" class="contact-link">
+              marketing@muebleslife.com
+            </a>
+          </div>
+          <div class="contact-item">
+            <span class="item-label">Colaboraciones</span>
+            <a href="#" class="contact-link underlined">
+              Rellena este formulario →
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -77,252 +120,443 @@ import Email from "@/assets/svg/Email.svg";
 
 <style>
   .contact-wrapper {
-    max-width: 1100px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin: auto;
-    margin-top: 4rem;
-    padding-bottom: 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
   }
 
-  .contact-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  /* Hero Section */
+  .contact-hero {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 5rem;
   }
 
-  .contact-header {
-    text-align: center;
-    margin-bottom: 4rem;
-    padding: 0 1rem;
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: var(--color-secondary);
   }
 
-  .contact-title {
-    font-size: var(--fs-xxl);
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--color-secondary);
     font-family: var(--font-primary);
-    font-weight: 450;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
   }
 
-  .contact-subtitle {
-    font-size: var(--fs-base);
+  .hero-description {
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
     line-height: 1.6;
     color: var(--color-secondary);
-    max-width: 700px;
-    margin: 0 auto 1rem;
+    opacity: 0.85;
+    margin: 0;
   }
 
-  .contact-subtitle strong {
-    text-decoration: underline;
+  .hero-description strong {
+    font-weight: 600;
+    opacity: 1;
   }
 
-  .email-link {
+  /* Quick Contact Card */
+  .quick-contact-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.75rem;
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .quick-contact-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: var(--color-secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .card-label {
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--color-secondary);
-    text-decoration: underline;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  .contact-greeting {
-    font-size: var(--fs-sm);
+  .card-value {
+    font-size: 1rem;
+    font-weight: 500;
     color: var(--color-secondary);
-    margin-top: 1rem;
   }
 
-  .contact-content {
+  .card-arrow {
+    color: var(--color-secondary);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  .quick-contact-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  /* Contact Grid */
+  .contact-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    align-items: start;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
   }
 
-  @media (min-width: 968px) {
-    .contact-content {
-      grid-template-columns: 1.8fr 1fr;
-      gap: 4rem;
-    }
+  /* Map Section */
+  .map-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-secondary);
+  }
+
+  .label-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent);
   }
 
   .map-container {
     width: 100%;
-    height: 450px;
-    border-radius: 8px;
+    height: 550px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  @media (min-width: 968px) {
-    .map-container {
-      height: 600px;
-    }
-  }
-  .contact-info {
+  /* Contact Cards */
+  .contact-cards {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    height: 100%;
-    justify-content: center;
-  }
-
-  .info-block {
-    display: flex;
     gap: 1.5rem;
-    align-items: flex-start;
   }
 
-  .info-icon {
-    flex-shrink: 0;
+  .contact-card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .contact-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-primary {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .header-icon {
     width: 48px;
     height: 48px;
+    border-radius: 10px;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    color: #333;
+    color: var(--color-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  .info-content {
-    flex: 1;
-  }
-
-  .info-label {
-    font-size: var(--fs-base);
-    font-family: var(--font-primary);
+  .card-title {
+    font-size: 1.15rem;
     font-weight: 500;
-    margin-bottom: 0.5rem;
     color: var(--color-secondary);
+    margin: 0;
+    font-family: var(--font-primary);
   }
 
-  .info-value {
-    display: block;
-    font-size: var(--fs-sm);
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-link {
+    font-size: 1rem;
     color: var(--color-secondary);
-    margin-bottom: 0.5rem;
-    transition: color 0.2s ease;
+    text-decoration: none;
+    transition: opacity 0.2s;
   }
 
-  .info-value:hover {
-    color: #686868;
+  .contact-link:hover {
+    opacity: 0.7;
   }
 
-  .info-value.phone {
-    /* font-size: var(--fs-md); */
-    font-weight: 550;
+  .contact-link.primary {
+    font-size: 1.25rem;
+    font-weight: 600;
   }
 
-  .info-schedule {
-    font-size: var(--fs-sm);
-    color: var(--color-secondary);
-    margin: 0.25rem 0;
-  }
-
-  .schedule-highlight {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 0.5px solid #e5e5e5;
-    width: 100%; /* Asegura que la línea use todo el ancho disponible */
-    max-width: 150px; /* Aumenta este valor para hacerla más larga */
-  }
-
-  .info-extra {
-    font-size: var(--fs-sm);
-    color: var(--color-secondary);
-    margin-top: 1rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .form-link {
+  .contact-link.underlined {
     text-decoration: underline;
   }
 
-  @media (max-width: 768px) {
-    .contact-header {
-      margin-bottom: 2rem;
-    }
+  /* Schedule Info */
+  .schedule-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+  }
 
-    .contact-title {
-      font-size: var(--fs-xl);
-    }
+  .schedule-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    .contact-subtitle {
-      font-size: var(--fs-sm);
-    }
+  .schedule-day {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    opacity: 0.7;
+  }
 
+  .schedule-time {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-secondary);
+  }
+
+  .schedule-special {
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .schedule-special strong {
+    font-weight: 600;
+  }
+
+  /* Contact Item */
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .item-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    opacity: 0.7;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
     .contact-wrapper {
-      margin-top: 2rem;
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .contact-hero {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
     .map-container {
-      height: 350px;
-    }
-
-    .info-icon {
-      width: 40px;
-      height: 40px;
-    }
-
-    .contact-info {
-      gap: 1.8rem; /* antes 3rem → ahora más compacto */
-    }
-
-    .info-block {
-      gap: 0.8rem; /* menos espacio entre icono y texto */
-    }
-
-    .info-value {
-      margin-bottom: 0.2rem; /* antes 0.5rem → menos separación */
-    }
-
-    .info-schedule {
-      margin: 0.15rem 0; /* más pegado */
-    }
-
-    .schedule-highlight {
-      margin-top: 0.5rem;
-      padding-top: 0.5rem;
-      max-width: 140px; /* un poco más corta para móvil */
-    }
-
-    .info-extra {
-      margin-top: 0.5rem;
-      margin-bottom: 0.1rem;
+      height: 450px;
     }
   }
 
-  /* --- Estilos optimizados para iPad / Tablets --- */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    .contact-content {
-      grid-template-columns: 1.5fr 1fr; /* Mapa un poco más grande */
-      gap: 3rem;
+  @media (max-width: 768px) {
+    .contact-wrapper {
+      padding: 3rem 1.25rem 2.5rem;
+    }
+
+    .contact-hero {
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+    }
+
+    .quick-contact-card {
+      padding: 1.5rem;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .contact-grid {
+      gap: 1.75rem;
     }
 
     .map-container {
-      height: 500px; /* Más alto que móvil, menos que desktop */
+      height: 380px;
     }
 
-    .contact-title {
-      font-size: var(--fs-xl); /* Tamaño equilibrado en tablets */
+    .contact-card {
+      padding: 1.5rem;
     }
 
-    .contact-subtitle {
-      font-size: var(--fs-base);
-      max-width: 80%; /* Evita que el texto se vea muy ancho */
+    .card-body {
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-wrapper {
+      padding: 2.5rem 1rem 2rem;
     }
 
-    .info-block {
-      gap: 1.2rem; /* Espaciado moderado */
+    .contact-hero {
+      gap: 1.75rem;
+      margin-bottom: 2.5rem;
     }
 
-    .info-icon {
+    .location-badge {
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    .location-badge svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .quick-contact-card {
+      padding: 1.25rem;
+      gap: 0.875rem;
+    }
+
+    .card-icon {
       width: 44px;
       height: 44px;
     }
 
-    /* Línea del horario más lógica y proporcionada */
-    .schedule-highlight {
-      max-width: 250px; /* Más larga que móvil, menos que desktop */
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
+    .card-label {
+      font-size: 0.8rem;
+    }
+
+    .card-value {
+      font-size: 0.95rem;
+    }
+
+    .contact-grid {
+      gap: 1.5rem;
+    }
+
+    .map-container {
+      height: 320px;
+    }
+
+    .contact-card {
+      padding: 1.25rem;
+    }
+
+    .header-icon {
+      width: 42px;
+      height: 42px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+    }
+
+    .contact-link.primary {
+      font-size: 1.15rem;
+    }
+
+    .schedule-info {
+      padding: 0.875rem;
+    }
+
+    .schedule-special {
+      padding: 0.65rem;
+      font-size: 0.85rem;
     }
   }
 </style>

@@ -41,52 +41,86 @@ const products = [
 
 <SectionContainer id="featured-products" class="mt-4">
   <div class="products-container">
-    <div class="titles">
-      <h2>Productos Destacados</h2>
-      <p>Los mejores productos seleccionados para ti</p>
+    <!-- Header con diseño dividido -->
+    <div class="section-header">
+      <div class="header-content">
+        <span class="header-label">Selección especial</span>
+        <h2 class="section-title">Productos Destacados</h2>
+      </div>
+      <div class="header-side">
+        <p class="section-description">
+          Los mejores productos seleccionados para ti
+        </p>
+        <a href="#" class="view-all-link">
+          Ver todos los productos
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
     </div>
-    <div class="products-grid">
+
+    <!-- Grid asimétrico de productos -->
+    <div class="products-layout">
       {
-        products.map((product) => (
-          // <article class="product-card">
-          //   <div class="product-badge">
-          //     <span class="discount-badge">Ahorrar {product.discount}%</span>
-          //     <img
-          //       src="/favicon.svg"
-          //       alt="Attack Shark Logo"
-          //       class="brand-logo-badge"
-          //     />
-          //   </div>
+        products.map((product, index) => (
+          <article class={`product-card card-${index + 1}`}>
+            {/* Badge de descuento flotante */}
+            {product.discount > 0 && (
+              <div class="floating-badge">
+                <span class="discount-text">-{product.discount}%</span>
+              </div>
+            )}
 
-          //   <div class="product-image">
-          //     <img src={product.image} alt={product.name} />
-          //   </div>
+            {/* Imagen del producto */}
+            <div class="product-visual">
+              <div class="image-wrapper">
+                <img src={product.image} alt={product.name} />
+              </div>
+              {product.available && (
+                <div class="stock-indicator">
+                  <span class="stock-dot" />
+                  <span class="stock-text">En stock</span>
+                </div>
+              )}
+            </div>
 
-          //   <div class="product-info">
-          //     <p class="product-brand">{product.brand}</p>
-          //     <h3 class="product-title">{product.name}</h3>
+            {/* Info del producto */}
+            <div class="product-details">
+              <div class="product-meta">
+                <span class="product-brand">{product.brand}</span>
+                <img
+                  src="/favicon.svg"
+                  alt="Logo"
+                  class="brand-icon"
+                />
+              </div>
+              
+              <h3 class="product-name">{product.name}</h3>
 
-          //     {product.available && (
-          //       <div class="product-availability">
-          //         <span class="availability-dot" />
-          //         <span class="availability-text">Disponible</span>
-          //       </div>
-          //     )}
+              {/* Precios */}
+              <div class="price-section">
+                <div class="price-row">
+                  <span class="current-price">S/ {product.price.toFixed(2)}</span>
+                  {product.oldPrice && (
+                    <span class="old-price">S/ {product.oldPrice.toFixed(2)}</span>
+                  )}
+                </div>
+                {product.oldPrice && (
+                  <span class="savings-text">
+                    Ahorras S/ {(product.oldPrice - product.price).toFixed(2)}
+                  </span>
+                )}
+              </div>
 
-          //     <button class="add-to-cart-btn">Añadir al carrito</button>
-          //   </div>
-          // </article>
-          <ProductCard
-            id={product.id.toString()}
-            name={product.name}
-            description='test'
-            inStock={true}
-            image={product.image}
-            images={Object.values({1: product.image})}
-            brand={product.brand}
-            category="test-category"
-            subcategory="test-subcategory"
-          />
+              <button class="add-button">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 2.5M17 13l1.5 2.5M8 17.5a.5.5 0 11-1 0 .5.5 0 011 0zM17 17.5a.5.5 0 11-1 0 .5.5 0 011 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Añadir
+              </button>
+            </div>
+          </article>
         ))
       }
     </div>
@@ -94,179 +128,373 @@ const products = [
 </SectionContainer>
 
 <style>
-  .titles {
-    margin-bottom: 2rem;
+  .products-container {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  h2 {
-    font-size: var(--fs-xl);
+  /* Header Section */
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .header-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-light);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
     font-family: var(--font-primary);
     font-weight: 450;
-  }
-
-  .products-container {
-    margin: 0 auto;
     color: var(--color-secondary);
+    margin: 0;
+    line-height: 1.1;
   }
 
-  .products-grid {
+  .header-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .section-description {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--color-text-light);
+    margin: 0;
+    max-width: 400px;
+  }
+
+  .view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-secondary);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .view-all-link:hover {
+    border-bottom-color: var(--color-secondary);
+  }
+
+  .view-all-link svg {
+    transition: transform 0.2s;
+  }
+
+  .view-all-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Products Layout - Grid Uniforme */
+  .products-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
 
   .product-card {
     background: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 1.75rem;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.3s ease;
     position: relative;
+    transition: all 0.3s ease;
+    height: 100%;
   }
 
   .product-card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-secondary);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
   }
 
-  .product-badge {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-  }
-
-  .discount-badge {
+  /* Floating Badge */
+  .floating-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     background: #dc2626;
     color: white;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
     font-weight: 700;
-    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    z-index: 2;
   }
 
-  .brand-logo-badge {
-    width: 60px;
-    height: auto;
-    object-fit: contain;
+  /* Product Visual */
+  .product-visual {
+    position: relative;
+    margin-bottom: 1.5rem;
   }
 
-  .product-image {
+  .image-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem 0;
-    margin-bottom: 1rem;
-    min-height: 200px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    padding: 2rem 1rem;
+    min-height: 180px;
   }
 
-  .product-image img {
+  .image-wrapper img {
     max-width: 100%;
-    max-height: 180px;
+    max-height: 160px;
     object-fit: contain;
     transition: transform 0.3s ease;
   }
 
-  .product-card:hover .product-image img {
-    transform: scale(1.05);
+  .product-card:hover .image-wrapper img {
+    transform: scale(1.08);
   }
 
-  .product-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    flex: 1;
-  }
-
-  .product-brand {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0;
-  }
-
-  .product-title {
-    font-size: 0.95rem;
-    font-family: var(--font-primary);
-    font-weight: 500;
-    color: #1a1a1a;
-    line-height: 1.4;
-    margin: 0;
-    min-height: 3.5rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .product-availability {
-    display: flex;
+  .stock-indicator {
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 50px;
+    width: fit-content;
   }
 
-  .availability-dot {
-    width: 8px;
-    height: 8px;
+  .stock-dot {
+    width: 6px;
+    height: 6px;
     background: #22c55e;
     border-radius: 50%;
   }
 
-  .availability-text {
-    font-size: 0.875rem;
+  .stock-text {
+    font-size: 0.8rem;
     color: #22c55e;
     font-weight: 600;
   }
 
-  .add-to-cart-btn {
-    width: 100%;
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
+  /* Product Details */
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+  }
+
+  .product-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-brand {
+    font-size: 0.8rem;
     font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .brand-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+  }
+
+  .product-name {
+    font-size: 0.95rem;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    color: var(--color-secondary);
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 4rem;
+  }
+
+  /* Price Section */
+  .price-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     margin-top: auto;
   }
 
-  .add-to-cart-btn:hover {
-    background: #1d4ed8;
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .current-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+  }
+
+  .old-price {
+    font-size: 1rem;
+    color: var(--color-secondary);
+    text-decoration: line-through;
+  }
+
+  .savings-text {
+    font-size: 0.8rem;
+    color: #22c55e;
+    font-weight: 600;
+  }
+
+  /* Add Button */
+  .add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .add-button:hover {
+    background: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .add-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .section-header {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .header-side {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .products-layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 768px) {
-    .products-grid {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
+    .section-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .products-layout {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
     }
 
     .product-card {
-      padding: 1rem;
+      padding: 1.5rem;
     }
 
-    .product-image {
-      min-height: 160px;
-      padding: 1rem 0;
+    .image-wrapper {
+      min-height: 150px;
+      padding: 1.5rem 1rem;
     }
 
-    .product-image img {
-      max-height: 150px;
+    .image-wrapper img {
+      max-height: 140px;
     }
 
-    .product-title {
-      font-size: 0.875rem;
-      min-height: 3rem;
+    .product-name {
+      font-size: 0.9rem;
+      min-height: 3.5rem;
+      -webkit-line-clamp: 2;
+    }
+
+    .current-price {
+      font-size: 1.35rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .products-layout {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
   }
 
   @media (max-width: 480px) {
-    .products-grid {
-      grid-template-columns: 1fr;
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .section-description {
+      font-size: 0.95rem;
+    }
+
+    .product-card {
+      padding: 1.25rem;
+    }
+
+    .image-wrapper {
+      min-height: 130px;
+      padding: 1.25rem 0.75rem;
+    }
+
+    .image-wrapper img {
+      max-height: 120px;
+    }
+
+    .product-name {
+      font-size: 0.85rem;
+    }
+
+    .current-price {
+      font-size: 1.25rem;
+    }
+
+    .add-button {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9rem;
     }
   }
 </style>

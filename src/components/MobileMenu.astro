@@ -1,5 +1,5 @@
 ---
-import Close from '@/assets/svg/Close.svg';
+import Close from "@/assets/svg/Close.svg";
 const navLinks = [
   { name: "Novedades", href: "/novedades" },
   { name: "Descuentos", href: "/descuentos" },
@@ -34,8 +34,7 @@ const bottomLinks = [
         id="closeMenuButton"
         aria-label="Cerrar menú"
       >
-      <Close width={32} height={32}/>
-
+        <Close width={32} height={32} />
       </button>
     </div>
 
@@ -120,14 +119,14 @@ const bottomLinks = [
     align-items: center;
     justify-content: space-between;
     padding: 1.25rem 1.5rem;
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-secondary);
     border-bottom: 1px solid #d4c4b5;
   }
 
   .mobile-menu-logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #333;
+    color: var(--color-text);
     text-decoration: none;
     letter-spacing: 0.05em;
   }
@@ -264,7 +263,7 @@ const bottomLinks = [
   }
 
   .mobile-nav-link:hover {
-    background-color: var(--color-primary-light);
+    background-color: gray;
     color: #000;
     padding-left: 2rem;
   }
