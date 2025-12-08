@@ -1,42 +1,21 @@
 ---
-import ProductCard from "@/components/ProductCard.astro";
+import { ProductCard } from "@/components/catalog/ProductCard";
 import SectionContainer from "@/components/SectionContainer.astro";
+import { enrichProductsWithImages } from "@/lib/data/products";
+import type { Product } from "@/lib/data/types";
+import { createClient } from "@supabase/supabase-js";
 
-const products = [
-  {
-    id: 4,
-    brand: "ATTACK SHARK",
-    name: "TECLADO ATTACK SHARK X98 | INALAMBRICO | SW LINEAR BLUEBERRY | RGB | BLANCO - GRIS - GRIS OSCURO",
-    price: 289.0,
-    oldPrice: 329.0,
-    discount: 12,
-    image: "/favicon.svg",
-    reviews: 0,
-    available: true,
-  },
-  {
-    id: 5,
-    brand: "ATTACK SHARK",
-    name: "TECLADO ATTACK SHARK X82 PRO HE | INALAMBRICO | MAGNETICO | RGB | BLANCO - COMIC",
-    price: 339.0,
-    oldPrice: 359.0,
-    discount: 6,
-    image: "/favicon.svg",
-    reviews: 0,
-    available: true,
-  },
-  {
-    id: 6,
-    brand: "ATTACK SHARK",
-    name: "MOUSE ATTACK SHARK G3 PRO | BASE DE CARGA| INALAMBRICO | 25,000 DPI | BLANCO",
-    price: 129.0,
-    oldPrice: 149.0,
-    discount: 13,
-    image: "/favicon.svg",
-    reviews: 0,
-    available: true,
-  },
-];
+const supabase = createClient(
+  import.meta.env.SUPABASE_URL,
+  import.meta.env.SUPABASE_ANON_KEY
+);
+
+const dataResponse = await supabase.from("products").select("*").limit(3);
+const products: Product[] = dataResponse.data || [];
+
+const enrichedProducts = await enrichProductsWithImages(supabase, products);
+
+
 ---
 
 <SectionContainer id="featured-products" class="mt-4">
@@ -63,64 +42,13 @@ const products = [
     <!-- Grid asimétrico de productos -->
     <div class="products-layout">
       {
-        products.map((product, index) => (
-          <article class={`product-card card-${index + 1}`}>
-            {/* Badge de descuento flotante */}
-            {product.discount > 0 && (
-              <div class="floating-badge">
-                <span class="discount-text">-{product.discount}%</span>
-              </div>
-            )}
-
-            {/* Imagen del producto */}
-            <div class="product-visual">
-              <div class="image-wrapper">
-                <img src={product.image} alt={product.name} />
-              </div>
-              {product.available && (
-                <div class="stock-indicator">
-                  <span class="stock-dot" />
-                  <span class="stock-text">En stock</span>
-                </div>
-              )}
-            </div>
-
-            {/* Info del producto */}
-            <div class="product-details">
-              <div class="product-meta">
-                <span class="product-brand">{product.brand}</span>
-                <img
-                  src="/favicon.svg"
-                  alt="Logo"
-                  class="brand-icon"
-                />
-              </div>
-              
-              <h3 class="product-name">{product.name}</h3>
-
-              {/* Precios */}
-              <div class="price-section">
-                <div class="price-row">
-                  <span class="current-price">S/ {product.price.toFixed(2)}</span>
-                  {product.oldPrice && (
-                    <span class="old-price">S/ {product.oldPrice.toFixed(2)}</span>
-                  )}
-                </div>
-                {product.oldPrice && (
-                  <span class="savings-text">
-                    Ahorras S/ {(product.oldPrice - product.price).toFixed(2)}
-                  </span>
-                )}
-              </div>
-
-              <button class="add-button">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 2.5M17 13l1.5 2.5M8 17.5a.5.5 0 11-1 0 .5.5 0 011 0zM17 17.5a.5.5 0 11-1 0 .5.5 0 011 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Añadir
-              </button>
-            </div>
-          </article>
+        enrichedProducts.map((product) => (
+          <ProductCard
+            product={product}
+            primaryImageUrl={product.primaryImageUrl ?? undefined}
+            secondaryImageUrl={product.secondaryImageUrl ?? undefined}
+            client:visible
+          />
         ))
       }
     </div>

@@ -5,12 +5,7 @@ import Cart from "@/assets/svg/Cart.svg";
 import MobileMenu from "@/components/MobileMenu.astro";
 import CartDrawer from "@/components/CartDrawer.astro";
 import { CartCounter } from "@/components/CartCounter/CartCounter";
-
-const navLinks = [
-  { name: "Categorias", href: "/categorias" },
-  { name: "Filosofía AGLE", href: "/filosofia" },
-  { name: "Contacto", href: "/contacto" },
-];
+import { navLinks } from "@/const/nav";
 ---
 
 <MobileMenu />
@@ -49,7 +44,7 @@ const navLinks = [
   .cart-placeholder {
     background: none;
     border: none;
-    color: white; 
+    color: #333;
     cursor: pointer;
     padding: 0.5rem;
     display: flex;
@@ -61,12 +56,6 @@ const navLinks = [
 
   .cart-placeholder {
     position: relative;
-  }
-  .cart-placeholder,
-  .cart-placeholder svg,
-  .cart-placeholder svg * {
-    color: white !important;
-    stroke: currentColor !important;
   }
 
   .cart-badge-placeholder {
@@ -128,7 +117,7 @@ const navLinks = [
   .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-text);
+    var(--color-text)
     text-decoration: none;
     letter-spacing: 0.05em;
   }

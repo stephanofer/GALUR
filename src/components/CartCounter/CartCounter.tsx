@@ -1,12 +1,11 @@
 import Cart from "@/assets/svg/Cart.svg";
-import { $cartCount } from "@/cart";
+import { $cartCount } from "@/stores/cart";
 import { useStore } from "@nanostores/preact";
 import styles from "./CartCounter.module.css";
 
 export function CartCounter() {
   const handleCLick = () => {
     const cartDrawer = document.querySelector(".cart-drawer-overlay");
-    // console.log("Cart button clicked");
     if (!cartDrawer) return;
     cartDrawer.classList.add("active");
     document.body.style.overflow = "hidden";

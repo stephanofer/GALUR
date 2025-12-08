@@ -1,28 +1,38 @@
+import type { CartItem } from "@/lib/data/types";
 import styles from "./AddToCartButton.module.css";
-import { addToCart } from "@/cart";
+import { addToCart, DEFAULT_QUANTITY } from "@/stores/cart";
+
+type CartItemData = Omit<CartItem, "quantity">;
 
 interface AddToCartButtonProps {
-  product: {
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    quantity: number;
-    inStock: boolean;
-  };
+  product: CartItemData;
+  quantity?: number;
+  onAddToCart?: () => void;
+  label?: string;
+  iconOnly?: boolean;
+  className?: string;
 }
 
-export function AddToCartButton({ product }: AddToCartButtonProps) {
-  const handleAddToCart = (product: AddToCartButtonProps["product"]) => {
-    addToCart(product);
+export function AddToCartButton({
+  product,
+  quantity = DEFAULT_QUANTITY,
+  onAddToCart,
+  label = "Agregar al carrito",
+  iconOnly = false,
+  className = "",
+}: AddToCartButtonProps) {
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+    onAddToCart?.();
   };
+
   return (
     <button
-      className={styles["add-to-cart-btn"]}
+      type="button"
+      className={`${styles["add-to-cart-btn"]} ${iconOnly ? styles["icon-only"] : ""} ${className}`}
       data-product-id={product.id}
-      disabled={!product.inStock}
       aria-label={`Agregar ${product.name} al carrito`}
-      onClick={() => handleAddToCart(product)}
+      onClick={handleAddToCart}
     >
       <svg
         width="18"
@@ -30,13 +40,13 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
+        strokeWidth="2"
       >
         <circle cx="9" cy="21" r="1"></circle>
         <circle cx="20" cy="21" r="1"></circle>
         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
       </svg>
-      <span>{product.inStock ? "Agregar al carrito" : "No disponible"}</span>
+      {!iconOnly && <span>{label}</span>}
     </button>
   );
 }

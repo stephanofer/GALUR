@@ -1,0 +1,222 @@
+---
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { CategoryPageShell } from "@/components/catalog/CategoryPageShell";
+import { PAGE_SIZE } from "@/config";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  getCategoryAndSubcategories,
+  getSubcategoryBySlugWithinCategory,
+} from "@/lib/data/categories";
+import {
+  getProductsByCategory,
+  getProductsBySubcategory,
+  enrichProductsWithImages,
+} from "@/lib/data/products";
+
+import type { AttributeFilters, ProductFilters } from "@/lib/data/types";
+import { createClient } from "@/lib/supabase";
+
+const { categorySlug } = Astro.params;
+
+if (!categorySlug) {
+  return Astro.redirect("/categorias");
+}
+
+const supabase = createClient({
+  request: Astro.request,
+  cookies: Astro.cookies,
+});
+
+const VALID_SORT_OPTIONS = [
+  "price_asc",
+  "price_desc",
+  "name_asc",
+  "name_desc",
+  "oldest",
+];
+
+const url = new URL(Astro.request.url);
+
+const rawPage = url.searchParams.get("page");
+const parsedPage = rawPage ? parseInt(rawPage, 10) : 1;
+const page = Number.isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
+
+const rawPageSize = url.searchParams.get("pageSize");
+const parsedPageSize = rawPageSize ? parseInt(rawPageSize, 10) : PAGE_SIZE;
+const pageSize =
+  Number.isNaN(parsedPageSize) || parsedPageSize < 1 || parsedPageSize > 50
+    ? PAGE_SIZE
+    : parsedPageSize;
+
+const rawSort = url.searchParams.get("sort");
+const sort = rawSort && VALID_SORT_OPTIONS.includes(rawSort) ? rawSort : null;
+
+const rawMinPrice = url.searchParams.get("minPrice");
+const rawMaxPrice = url.searchParams.get("maxPrice");
+const parsedMinPrice = rawMinPrice ? parseFloat(rawMinPrice) : undefined;
+const parsedMaxPrice = rawMaxPrice ? parseFloat(rawMaxPrice) : undefined;
+const minPrice =
+  parsedMinPrice !== undefined &&
+  !Number.isNaN(parsedMinPrice) &&
+  parsedMinPrice >= 0
+    ? parsedMinPrice
+    : undefined;
+const maxPrice =
+  parsedMaxPrice !== undefined &&
+  !Number.isNaN(parsedMaxPrice) &&
+  parsedMaxPrice >= 0
+    ? parsedMaxPrice
+    : undefined;
+
+const inStock = url.searchParams.get("inStock") === "true";
+const subcategorySlug = url.searchParams.get("subcategoria");
+
+const attributeFilters: AttributeFilters = {};
+const reservedParams = [
+  "subcategoria",
+  "page",
+  "pageSize",
+  "sort",
+  "minPrice",
+  "maxPrice",
+  "inStock",
+];
+
+url.searchParams.forEach((value, key) => {
+  if (!reservedParams.includes(key) && value) {
+    if (attributeFilters[key]) {
+      if (Array.isArray(attributeFilters[key])) {
+        (attributeFilters[key] as string[]).push(value);
+      } else {
+        attributeFilters[key] = [attributeFilters[key] as string, value];
+      }
+    } else {
+      attributeFilters[key] = value;
+    }
+  }
+});
+
+const categoryData = await getCategoryAndSubcategories(supabase, categorySlug);
+
+if (!categoryData) {
+  return Astro.redirect("/categorias");
+}
+
+const { category, subcategories } = categoryData;
+
+const subcategorySlugs = subcategories.map((s) => s.slug);
+const validatedSubcategorySlug =
+  subcategorySlug && subcategorySlugs.includes(subcategorySlug)
+    ? subcategorySlug
+    : null;
+
+let currentSubcategory = null;
+let filterConfig: any[] = [];
+
+if (validatedSubcategorySlug) {
+  const subcategoryData = await getSubcategoryBySlugWithinCategory(
+    supabase,
+    categorySlug,
+    validatedSubcategorySlug
+  );
+
+  if (!subcategoryData) {
+    return Astro.redirect(`/categorias/${categorySlug}`);
+  }
+
+  currentSubcategory = subcategoryData.subcategory;
+  filterConfig = currentSubcategory.filter_config || [];
+}
+
+const filters: ProductFilters = {
+  attributeFilters,
+  minPrice: minPrice,
+  maxPrice: maxPrice,
+  inStock: inStock || undefined,
+  sort: sort as any,
+};
+
+let productsResponse;
+
+if (currentSubcategory) {
+  productsResponse = await getProductsBySubcategory(
+    supabase,
+    currentSubcategory.id,
+    filters,
+    { page, pageSize }
+  );
+} else {
+  productsResponse = await getProductsByCategory(
+    supabase,
+    category.id,
+    filters,
+    { page, pageSize }
+  );
+}
+
+const enrichedProducts = await enrichProductsWithImages(
+  supabase,
+  productsResponse.items
+);
+
+const initialFilters = {
+  subcategorySlug: validatedSubcategorySlug,
+  page: productsResponse.page,
+  pageSize: productsResponse.pageSize,
+  sort: sort,
+  attributeFilters,
+  minPrice: filters.minPrice,
+  maxPrice: filters.maxPrice,
+  inStock: inStock,
+};
+
+const initialPagination = {
+  page: productsResponse.page,
+  pageSize: productsResponse.pageSize,
+  total: productsResponse.total,
+  totalPages: productsResponse.totalPages,
+};
+
+const pageTitle = currentSubcategory
+  ? `${currentSubcategory.name} - ${category.name} | ARM`
+  : `${category.name} | ARM`;
+
+const pageDescription = currentSubcategory
+  ? `Explora nuestra selección de ${currentSubcategory.name} en ${category.name}`
+  : `Explora nuestra categoría de ${category.name}`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="container">
+    <header>
+      <Breadcrumb
+        category={category}
+        currentSubcategorySlug={currentSubcategory?.slug}
+      />
+    </header>
+
+    <CategoryPageShell
+      client:load
+      category={JSON.parse(JSON.stringify(category))}
+      subcategories={JSON.parse(JSON.stringify(subcategories))}
+      currentSubcategory={currentSubcategory
+        ? JSON.parse(JSON.stringify(currentSubcategory))
+        : null}
+      filterConfig={JSON.parse(JSON.stringify(filterConfig))}
+      initialProducts={JSON.parse(JSON.stringify(enrichedProducts))}
+      initialFilters={JSON.parse(JSON.stringify(initialFilters))}
+      initialPagination={JSON.parse(JSON.stringify(initialPagination))}
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    padding: 2rem 1rem;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  header {
+    margin-bottom: 1rem;
+  }
+</style>

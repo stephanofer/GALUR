@@ -4,14 +4,17 @@ import {
   increaseQuantity,
   removeFromCart,
   setQuantity,
-} from "@/cart";
+  MIN_QUANTITY,
+  MAX_QUANTITY,
+  clampQuantity,
+} from "@/stores/cart";
 import { useStore } from "@nanostores/preact";
 import styles from "./cartItems.module.css";
 export function CartItems() {
   const cartItems = Object.values(useStore($cart));
 
-  const handleDelete = (id: string) => {
-    removeFromCart(id);
+  const handleDelete = (id: number) => {
+    removeFromCart(String(id));
   };
 
   return (
@@ -25,17 +28,20 @@ export function CartItems() {
               style={{ animationDelay: `${0.05 + index * 0.05}s` }}
             >
               <div className={styles["cart-item-image"]}>
-                <img src={item.image} alt={item.name} />
+                <img src={item.image_url || ""} alt={item.name} />
               </div>
               <div className={styles["cart-item-details"]}>
-                <h3 className={styles["cart-item-name"]}>{item.name}</h3>
-                <div className={styles["cart-item-meta"]}>
-                  <span className={styles["cart-item-brand"]}>ARM</span>
-                  <span className={styles["meta-separator"]}>•</span>
-                  <span className={styles["cart-item-material"]}>
-                    Maderitaxd
-                  </span>
-                </div>
+                <a
+                  href={`/producto/${item.slug}`}
+                  className={styles["cart-item-header"]}
+                >
+                  <h3 className={styles["cart-item-name"]}>{item.name}</h3>
+                  <div className={styles["cart-item-meta"]}>
+                    <span className={styles["cart-item-brand"]}>
+                      {item.brand || ""}
+                    </span>
+                  </div>
+                </a>
                 <div className={styles["cart-item-actions"]}>
                   <div className={styles["quantity-controls"]}>
                     <button
@@ -43,7 +49,7 @@ export function CartItems() {
                       data-action="decrease"
                       data-item-id={item.id}
                       aria-label="Disminuir cantidad"
-                      onClick={() => decreaseQuantity(item.id)}
+                      onClick={() => decreaseQuantity(String(item.id))}
                     >
                       <svg
                         width="16"
@@ -58,22 +64,29 @@ export function CartItems() {
                     </button>
                     <input
                       type="number"
-                      min="1"
+                      min={MIN_QUANTITY}
+                      max={MAX_QUANTITY}
                       className={styles["quantity-display"]}
                       value={item.quantity}
-                      onChange={(e) => {
-                        const value = parseInt(e.currentTarget.value);
-                        if (value > 0) {
-                          setQuantity(item.id, value);
-                        } else {
-                          setQuantity(item.id, 1);
+                      onInput={(e) => {
+                        const target = e.currentTarget;
+                        const value = parseInt(target.value, 10);
+
+                        if (value > MAX_QUANTITY) {
+                          target.value = MAX_QUANTITY.toString();
+                          setQuantity(String(item.id), MAX_QUANTITY);
+                          return;
+                        }
+
+                        if (!isNaN(value) && value >= MIN_QUANTITY) {
+                          setQuantity(String(item.id), value);
                         }
                       }}
                       onBlur={(e) => {
-                        const value = parseInt(e.currentTarget.value);
-                        if (!value || value <= 0) {
-                          setQuantity(item.id, 1);
-                        }
+                        const value = parseInt(e.currentTarget.value, 10);
+                        const validValue = clampQuantity(value);
+                        e.currentTarget.value = validValue.toString();
+                        setQuantity(String(item.id), validValue);
                       }}
                     />
                     <button
@@ -81,7 +94,7 @@ export function CartItems() {
                       data-action="increase"
                       data-item-id={item.id}
                       aria-label="Aumentar cantidad"
-                      onClick={() => increaseQuantity(item.id)}
+                      onClick={() => increaseQuantity(String(item.id))}
                     >
                       <svg
                         width="16"

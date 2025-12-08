@@ -1,19 +1,23 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
 import SectionContainer from "@/components/SectionContainer.astro";
-import { createClient } from "@/lib/supabase";
-import { getAllCategories } from "@/lib/products";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Categories from "@/sections/home/Categories.astro";
+import { getAllCategories } from "@/lib/data/categories";
 
-const supabase = createClient({
-  request: Astro.request,
-  cookies: Astro.cookies,
-});
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.SUPABASE_URL,
+  import.meta.env.SUPABASE_ANON_KEY
+);
 
 const categoriesData = await getAllCategories(supabase);
 
 const title = "Categorías de Productos";
 const description =
   "Explora todas nuestras categorías de productos - muebles de madera maciza diseñados con estilo y sostenibilidad.";
+
+export const prerender = true;
 ---
 
 <BaseLayout title={title} description={description}>

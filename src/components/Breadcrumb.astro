@@ -1,0 +1,49 @@
+---
+type Props = {
+  category: {
+    name: string;
+    slug: string;
+    subcategories?: { name: string; slug: string }[];
+  };
+  currentSubcategorySlug?: string;
+};
+
+const { category } = Astro.props;
+---
+
+<nav>
+  <a href="/">Inicio</a>
+  <span class="deco">/</span>
+  <a href="/categorias">Categorías</a>
+  <span class="deco">/</span>
+  <span class="category-name">{category.name}</span>
+</nav>
+
+<style>
+  nav {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-family: var(--font-primary);
+    font-weight: 400;
+  }
+
+  @media (max-width: 1024px) {
+    nav {
+      margin-bottom: 0rem;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: #666;
+  }
+
+  .deco {
+    margin: 0 0.3rem;
+  }
+
+  .category-name {
+    color: #333;
+    font-weight: 450;
+  }
+</style>
