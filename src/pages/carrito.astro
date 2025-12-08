@@ -7,7 +7,7 @@ import Info from "@/assets/svg/Info.svg";
 const title = "Carrito de Compras";
 const description =
   "Revisa los productos que has añadido a tu carrito de compras.";
-
+export const prerender = true;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -36,7 +36,7 @@ const description =
             </p>
           </div>
 
-          <PlaceOrderButton client:load />
+          <PlaceOrderButton client:only="preact" />
 
           <button class="continue-shopping-btn"> Continuar comprando </button>
         </div>
