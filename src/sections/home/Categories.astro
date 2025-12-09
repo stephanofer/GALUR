@@ -1,32 +1,23 @@
 ---
 import SectionContainer from "@/components/SectionContainer.astro";
+import { getAllCategories } from "@/lib/data/categories";
+import { createClient } from "@supabase/supabase-js";
 
-const categories = [
-  {
-    name: "Dormitorio",
-    image:
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80",
-    link: "/categorias/dormitorio",
-  },
-  {
-    name: "Montessori",
-    image:
-      "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=800&q=80",
-    link: "/categorias/montessori",
-  },
-  {
-    name: "Comedor",
-    image:
-      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=800&q=80",
-    link: "/categorias/comedor",
-  },
-  {
-    name: "Exterior",
-    image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
-    link: "/categorias/exterior",
-  },
-];
+// Crear cliente de Supabase
+const supabase = createClient(
+  import.meta.env.SUPABASE_URL,
+  import.meta.env.SUPABASE_ANON_KEY
+);
+
+// Obtener categorías desde Supabase
+const categoriesData = await getAllCategories(supabase);
+
+// Limitar a las primeras 4 categorías para la sección home
+const categories = categoriesData.slice(0, 4).map((cat) => ({
+  name: cat.name,
+  image: cat.image_url,
+  link: `/categorias/${cat.slug}`,
+}));
 ---
 
 <SectionContainer id="categories">

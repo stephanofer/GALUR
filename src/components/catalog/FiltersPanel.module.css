@@ -27,6 +27,7 @@
 .filters-title {
   font-size: var(--fs-md);
   font-family: var(--font-primary);
+  color: var(--color-secondary);
   font-weight: 450;
   margin: 0;
 }
